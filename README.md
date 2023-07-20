@@ -96,8 +96,8 @@ yarn start:dev
 
    - **POST** `api/v1/auth/signup`: Create a new user account.
    - **POST** `api/v1/auth/login`: Authenticate and receive a JWT token.
-   - **GET** `api/v1/products`: Get all products.
-   - **GET** `api/v1/products/:id`: Get a specific product by its ID.
+   - **GET** `api/v1/products`: Get all products (requires JWT token).
+   - **GET** `api/v1/products/:id`: Get a specific product by its ID (requires JWT token).
    - **POST** `api/v1/products`: Add a new product (requires JWT token).
    - **DELETE** `api/v1/products/:id`: Delete a product by its ID (requires JWT token).
    - **PATCH** `api/v1/products/:id`: Update product information (requires JWT token).
