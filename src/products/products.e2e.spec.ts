@@ -34,12 +34,6 @@ describe('ProductsController', () => {
       getRepositoryToken(Product),
     );
     jest.spyOn(productsService, 'delete').mockResolvedValue(Promise.resolve());
-    /*  jest.spyOn(productsService, 'delete').mockResolvedValue({
-        id: 1, // You can return any relevant response here
-        name: 'Deleted Product',
-        type: 'Deleted Type',
-        quantity: 0,
-      }); */
   });
 
   describe('findAll', () => {
@@ -144,35 +138,6 @@ describe('ProductsController', () => {
     });
   });
 
-  /* describe('delete', () => {
-    it('should delete an existing product', async () => {
-      const productId = 1;
-      const mockProduct = mockProducts.find(
-        (product) => product.id === productId,
-      );
-      console.log(mockProduct);
-      // Mocking the service method to return the product to be deleted
-      jest.spyOn(productsService, 'findOne').mockResolvedValue(mockProduct);
-
-      const response = await productsController.delete(productId);
-      expect(response).toEqual({
-        message: `Product id ${productId} deleted successfully`,
-      });
-    });
-
-    it('should throw a NotFoundException when product does not exist', async () => {
-      const productId = 100;
-
-      // Mocking the service method to return null (product not found)
-      jest.spyOn(productsService, 'findOne').mockResolvedValue(null);
-
-      try {
-        await productsController.delete(productId);
-      } catch (error) {
-        expect(error.message).toBe('Product does not exist!');
-      }
-    });
-  }); */
   describe('delete', () => {
     it('should delete an existing product', async () => {
       const productId = 1;
