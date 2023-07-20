@@ -2,10 +2,8 @@ import {
   BaseEntity,
   BeforeInsert,
   Column,
-  CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 
@@ -19,14 +17,6 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
-
-  /* @Column()
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @Column()
-  @UpdateDateColumn()
-  updatedAt: Date; */
 
   @BeforeInsert()
   async hashPassword() {

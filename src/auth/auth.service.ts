@@ -1,43 +1,67 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  BadRequestException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { User } from 'src/users/user.entity';
-import { UsersService } from 'src/users/users.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './user.entity';
+import { CreateUserDto } from './dto/create-user.dto';
 import { AuthLoginDto } from './dto/auth-login.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
     private jwtService: JwtService,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   async signup(createUserDto: CreateUserDto): Promise<User> {
-    // Create a new user using the UsersService
-    const newUser = await this.usersService.create(createUserDto);
-    return newUser;
+    try {
+      // Validation of CreateUserDto is handled within the DTO itself
+      const newUser = this.userRepository.create(createUserDto);
+      await this.userRepository.save(newUser);
+      return newUser;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   async login(authLoginDto: AuthLoginDto) {
-    const user = await this.validateUser(authLoginDto);
+    try {
+      const user = await this.validateUser(authLoginDto);
 
-    const payload = {
-      userId: user.id,
-    };
+      const payload = {
+        userId: user.id,
+      };
 
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+      return {
+        access_token: this.jwtService.sign(payload),
+      };
+    } catch (error) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
   }
 
-  async validateUser(authLoginDto: AuthLoginDto): Promise<User> {
-    const { email, password } = authLoginDto;
+  private async validateUser(authLoginDto: AuthLoginDto): Promise<User> {
+    try {
+      // Validation of AuthLoginDto is handled within the DTO itself
+      const { email, password } = authLoginDto;
 
-    const user = await this.usersService.findByEmail(email);
-    if (!(await user?.validatePassword(password))) {
-      throw new UnauthorizedException();
+      const user = await this.userRepository.findOne({ where: { email } });
+      if (!user) {
+        throw new UnauthorizedException('Invalid email');
+      }
+
+      if (!(await user.validatePassword(password))) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      return user;
+    } catch (error) {
+      throw new UnauthorizedException('Invalid credentials');
     }
-
-    return user;
   }
 }

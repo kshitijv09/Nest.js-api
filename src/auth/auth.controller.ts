@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { AuthLoginDto } from './dto/auth-login.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
@@ -13,7 +13,6 @@ export class AuthController {
     const newUser = await this.authService.signup(createUserDto);
     return {
       message: 'User created successfully!',
-      user: newUser,
     };
   }
 

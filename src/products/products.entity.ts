@@ -12,5 +12,5 @@ export class Product {
   public type: string;
 
   @Column()
-  public quantity: string;
+  public quantity: number;
 }

@@ -5,14 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { Product } from './products/products.model';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     ProductsModule,
-    UsersModule,
     AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
