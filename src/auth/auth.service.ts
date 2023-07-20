@@ -20,7 +20,6 @@ export class AuthService {
 
   async signup(createUserDto: CreateUserDto): Promise<User> {
     try {
-      // Validation of CreateUserDto is handled within the DTO itself
       const newUser = this.userRepository.create(createUserDto);
       await this.userRepository.save(newUser);
       return newUser;
@@ -47,7 +46,6 @@ export class AuthService {
 
   private async validateUser(authLoginDto: AuthLoginDto): Promise<User> {
     try {
-      // Validation of AuthLoginDto is handled within the DTO itself
       const { email, password } = authLoginDto;
 
       const user = await this.userRepository.findOne({ where: { email } });

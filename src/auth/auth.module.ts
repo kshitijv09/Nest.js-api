@@ -4,7 +4,7 @@ import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { User } from './user.entity'; // Import the User entity
+import { User } from './user.entity';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
@@ -19,7 +19,7 @@ import { AuthController } from './auth.controller';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([User]), // Include the User entity in the TypeOrmModule
+    TypeOrmModule.forFeature([User]),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
