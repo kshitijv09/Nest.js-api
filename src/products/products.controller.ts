@@ -11,7 +11,7 @@ import {
 import { UseGuards } from '@nestjs/common/decorators';
 import { ProductsService } from './products.service';
 import { Product } from './products.entity';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AddProductDto } from './dto/addproduct.dto';
 import { UpdateProductDto } from './dto/updateproduct.dto';
 
