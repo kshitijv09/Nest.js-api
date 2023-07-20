@@ -22,52 +22,108 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# API using Nest.js, TypeORM, PostgreSQL, and JWT
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This API is built using Nest.js, TypeORM, PostgreSQL, and JWT, providing various functionalities such as user signup, login, and CRUD operations for managing products. The API also includes unit testing files using Jest to ensure the reliability and stability of the application.
+
+## Features
+
+1. User Signup: Allows users to create a new account by providing a unique username and password.
+
+2. User Login: Enables users to authenticate and obtain a JSON Web Token (JWT) for accessing protected routes.
+
+3. Get All Products: Retrieves a list of all products available in the system.
+
+4. Get Single Product: Fetches details of a specific product using its unique identifier.
+
+5. Add Product: Allows authorized users to add new products to the database.
+
+6. Delete Product: Authorized users can delete products based on their unique identifiers.
+
+7. Update Product: Authorized users can update product information.
+
+## Prerequisites
+
+Before running the API, ensure you have the following installed:
+
+- Node.js (at least version 12)
+- PostgreSQL database
+- npm or yarn (npm is included with Node.js)
 
 ## Installation
 
-```bash
-$ npm install
+1. Clone the repository:
+
+```
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
 ```
 
-## Running the app
+2. Install dependencies:
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```
+npm install
+# or
+yarn install
 ```
 
-## Test
+3. Set up the database:
 
-```bash
-# unit tests
-$ npm run test
+   - Create a new PostgreSQL database.
+   - Configure the database connection settings in `src/config/database.ts`.
 
-# e2e tests
-$ npm run test:e2e
+4. Run Migrations:
 
-# test coverage
-$ npm run test:cov
+```
+npm run migration:run
+# or
+yarn migration:run
 ```
 
-## Support
+## Usage
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+1. Run the API:
 
-## Stay in touch
+```
+npm run start:dev
+# or
+yarn start:dev
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+2. The API will be accessible at `http://localhost:3000` by default.
+
+3. Endpoints:
+
+   - **POST** `/auth/signup`: Create a new user account.
+   - **POST** `/auth/login`: Authenticate and receive a JWT token.
+   - **GET** `/products`: Get all products.
+   - **GET** `/products/:id`: Get a specific product by its ID.
+   - **POST** `/products`: Add a new product (requires JWT token).
+   - **DELETE** `/products/:id`: Delete a product by its ID (requires JWT token).
+   - **PATCH** `/products/:id`: Update product information (requires JWT token).
+
+## Testing
+
+The API comes with unit testing files using Jest to ensure its correctness. To run the tests:
+
+```
+npm run test
+# or
+yarn test
+```
+
+## Security
+
+Please note that this API uses JWT for authentication, and it's essential to handle and store JWT tokens securely to prevent unauthorized access.
+
+## Contributions
+
+Contributions to the project are welcome! Feel free to open issues or submit pull requests for enhancements, bug fixes, or additional features.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This API is open-source and available under the [MIT License](LICENSE).
+
+---
+
+Thank you for using our API! If you have any questions or need further assistance, please don't hesitate to contact us. Happy coding!
